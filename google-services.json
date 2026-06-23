@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "694174154448",
+    "project_id": "intelligent-gambler",
+    "storage_bucket": "intelligent-gambler.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694174154448:android:0b32fd731b779990b7e8d5",
+        "android_client_info": {
+          "package_name": "com.skycoding.intelligentgambler"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCGjsb1EQNSkqJ9IKXstV-Yh-4yPUZtBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
