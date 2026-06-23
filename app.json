@@ -20,7 +20,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "googleServicesFile": "$GOOGLE_SERVICES_JSON"
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "output": "static",
