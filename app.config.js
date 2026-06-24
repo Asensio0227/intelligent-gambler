@@ -1,5 +1,4 @@
-export default ({ config }) => ({
-  ...config,
+export default () => ({
   name: 'Intelligent Gambler',
   slug: 'intelligent-gambler',
   version: '1.0.0',
