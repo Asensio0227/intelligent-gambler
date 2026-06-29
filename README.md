@@ -94,6 +94,13 @@ git push
 # EAS .ENV
 
 1. Find the variable (to confirm which environment it's in — development/preview/production):
-   basheas env:list
+
+   # bash
+
+   eas env:list
+
 2. Update it:
-   basheas env:update EXPO_PUBLIC_API_URL --value "https://" --environment production
+   # bash
+   eas env:update EXPO_PUBLIC_API_URL --value "https://igintelligentgambler-105xf3nj.b4a.run/api" --environment production
+
+./update-api-url.sh "https://your-new-url.b4a.run/api"
