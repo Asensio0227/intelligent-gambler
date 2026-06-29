@@ -15,6 +15,9 @@ const formatPrediction = (market: string, value: string | boolean, line?: number
   if (market === 'goalsOverUnder' && line) return `${value} ${line}`;
   if (market === 'cornersOverUnder' && line) return `${value} ${line}`;
   if (market === 'yellowCards' && line) return `${value} ${line}`;
+  if (value === 'HOME_OR_DRAW') return 'HOME / DRAW';
+  if (value === 'AWAY_OR_DRAW') return 'AWAY / DRAW';
+  if (value === 'HOME_OR_AWAY') return 'HOME / AWAY';
   return String(value);
 };
 
