@@ -12,6 +12,7 @@ export interface IPrediction {
   mode: 'shared' | 'personal';
   markets: {
     result: IMarket;
+    doubleChance: IMarket;
     correctScore: IMarket;
     goalsOverUnder: IMarket;
     bts: IMarket;

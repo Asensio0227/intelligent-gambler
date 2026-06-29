@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useAuthStore } from '@/store/authStore';
 import { RegisterForm } from '@/components/auth/RegisterForm';
-import { IRegisterPayload } from '@/types/auth.types';
 import { COLORS } from '@/constants/colors';
+import { useAuthStore } from '@/store/authStore';
+import { IRegisterPayload } from '@/types/auth.types';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function RegisterScreen() {
   const { register, isLoading } = useAuthStore();
@@ -21,10 +29,16 @@ export default function RegisterScreen() {
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView
+      style={styles.flex}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 24}
+    >
       <ScrollView
         contentContainerStyle={styles.container}
-        keyboardShouldPersistTaps="handled"
+        keyboardShouldPersistTaps='handled'
+        keyboardDismissMode='on-drag'
+        showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
           <Text style={styles.title}>Create Account</Text>
@@ -32,21 +46,34 @@ export default function RegisterScreen() {
         </View>
 
         <View style={styles.card}>
-          <RegisterForm onSubmit={handleRegister} isLoading={isLoading} error={error} />
+          <RegisterForm
+            onSubmit={handleRegister}
+            isLoading={isLoading}
+            error={error}
+          />
         </View>
 
-        <TouchableOpacity onPress={() => router.back()} style={styles.loginLink}>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          style={styles.loginLink}
+        >
           <Text style={styles.loginText}>
             Already have an account?{' '}
-            <Text style={{ color: COLORS.primary, fontWeight: '700' }}>Sign in</Text>
+            <Text style={{ color: COLORS.primary, fontWeight: '700' }}>
+              Sign in
+            </Text>
           </Text>
         </TouchableOpacity>
+
+        {/* Extra bottom padding so the sign-in link is never under the keyboard */}
+        <View style={styles.bottomSpacer} />
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  flex: { flex: 1 },
   container: {
     flexGrow: 1,
     padding: 24,
@@ -65,4 +92,5 @@ const styles = StyleSheet.create({
   },
   loginLink: { marginTop: 24, alignItems: 'center' },
   loginText: { color: COLORS.textMuted, fontSize: 14 },
+  bottomSpacer: { height: 40 },
 });

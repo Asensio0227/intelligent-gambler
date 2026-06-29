@@ -14,6 +14,7 @@ import { Header } from '@/components/shared/Header';
 import { COLORS } from '@/constants/colors';
 import { PREFERRED_MARKET_OPTIONS } from '@/constants/markets';
 import { useRefresh } from '@/hooks/useRefresh';
+import { ticketService } from '@/services/ticket.service';
 import { IAutoGenerateParams, ITicket } from '@/types/ticket.types';
 
 type ActiveTab = 'tickets' | 'auto' | 'ask';
@@ -80,9 +81,24 @@ export default function TicketsScreen() {
   useFocusEffect(
     useCallback(() => {
       fetchMyTickets();
+      // On focus, trigger server-side resolve if any visible tickets are pending
+      const triggerResolveIfNeeded = async () => {
+        const { tickets: current } = useTicketStore.getState();
+        const hasPending = current.some((t) => t.status === 'PENDING');
+        if (hasPending) {
+          try {
+            // Resolve the first pending ticket — runResolveOutcomes on the server
+            // resolves ALL pending tickets in one pass, so one call is enough.
+            const first = current.find((t) => t.status === 'PENDING');
+            if (first) await ticketService.resolveTicket(first._id);
+          } catch {}
+          await useTicketStore.getState().refreshTicketStatuses();
+        }
+      };
+      triggerResolveIfNeeded();
       const interval = setInterval(() => {
         useTicketStore.getState().refreshTicketStatuses();
-      }, 30000);
+      }, 60000);
       return () => clearInterval(interval);
     }, [])
   );

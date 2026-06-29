@@ -15,6 +15,9 @@ export const ticketService = {
   getById: (id: string) =>
     api.get<ITicket>(`/tickets/${id}`),
 
+  resolveTicket: (id: string) =>
+    api.post<ITicket>(`/tickets/${id}/resolve`),
+
   create: (data: Partial<ITicket>) =>
     api.post<ITicket>('/tickets', data),
 

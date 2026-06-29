@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useAuthStore } from '@/store/authStore';
 import { LoginForm } from '@/components/auth/LoginForm';
 import { COLORS } from '@/constants/colors';
+import { useAuthStore } from '@/store/authStore';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function LoginScreen() {
   const { login, isLoading } = useAuthStore();
@@ -15,38 +23,61 @@ export default function LoginScreen() {
     try {
       await login({ email, password });
     } catch (e: any) {
-      setError(e?.response?.data?.message ?? 'Login failed. Check your credentials.');
+      setError(
+        e?.response?.data?.message ?? 'Login failed. Check your credentials.',
+      );
     }
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView
+      style={styles.flex}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 24}
+    >
       <ScrollView
         contentContainerStyle={styles.container}
-        keyboardShouldPersistTaps="handled"
+        keyboardShouldPersistTaps='handled'
+        keyboardDismissMode='on-drag'
+        showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
           <Text style={styles.emoji}>⚽</Text>
           <Text style={styles.title}>Intelligent Gambler</Text>
-          <Text style={styles.subtitle}>Sign in to access your predictions</Text>
+          <Text style={styles.subtitle}>
+            Sign in to access your predictions
+          </Text>
         </View>
 
         <View style={styles.card}>
-          <LoginForm onSubmit={handleLogin} isLoading={isLoading} error={error} />
+          <LoginForm
+            onSubmit={handleLogin}
+            isLoading={isLoading}
+            error={error}
+          />
         </View>
 
-        <TouchableOpacity onPress={() => router.push('/(auth)/register')} style={styles.registerLink}>
+        <TouchableOpacity
+          onPress={() => router.push('/(auth)/register')}
+          style={styles.registerLink}
+        >
           <Text style={styles.registerText}>
             Don't have an account?{' '}
-            <Text style={{ color: COLORS.primary, fontWeight: '700' }}>Sign up</Text>
+            <Text style={{ color: COLORS.primary, fontWeight: '700' }}>
+              Sign up
+            </Text>
           </Text>
         </TouchableOpacity>
+
+        {/* Extra bottom padding so the register link is never under the keyboard */}
+        <View style={styles.bottomSpacer} />
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  flex: { flex: 1 },
   container: {
     flexGrow: 1,
     padding: 24,
@@ -55,7 +86,12 @@ const styles = StyleSheet.create({
   },
   header: { alignItems: 'center', marginBottom: 40 },
   emoji: { fontSize: 56, marginBottom: 12 },
-  title: { color: COLORS.text, fontSize: 28, fontWeight: '800', letterSpacing: -0.5 },
+  title: {
+    color: COLORS.text,
+    fontSize: 28,
+    fontWeight: '800',
+    letterSpacing: -0.5,
+  },
   subtitle: { color: COLORS.textMuted, fontSize: 15, marginTop: 6 },
   card: {
     backgroundColor: COLORS.surface,
@@ -66,4 +102,5 @@ const styles = StyleSheet.create({
   },
   registerLink: { marginTop: 24, alignItems: 'center' },
   registerText: { color: COLORS.textMuted, fontSize: 14 },
+  bottomSpacer: { height: 40 },
 });

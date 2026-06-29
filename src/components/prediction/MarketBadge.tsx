@@ -14,6 +14,9 @@ const formatPrediction = (market: string, prediction: string | boolean, line?: n
   if (market === 'goalsOverUnder') return `${prediction} ${line ?? 2.5} GOALS`;
   if (market === 'cornersOverUnder') return `${prediction} ${line ?? 9.5} CORNERS`;
   if (market === 'yellowCards') return `${prediction} ${line ?? 3.5} CARDS`;
+  if (market === 'doubleChance') {
+    return prediction === 'HOME_OR_DRAW' ? 'HOME / DRAW' : 'AWAY / DRAW';
+  }
   return String(prediction);
 };
 

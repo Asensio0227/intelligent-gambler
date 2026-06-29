@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
 import { IRegisterPayload } from '@/types/auth.types';
 import { COLORS } from '@/constants/colors';
 
@@ -18,6 +18,8 @@ export const RegisterForm: React.FC<Props> = ({ onSubmit, isLoading, error }) =>
   });
   const [confirmPassword, setConfirmPassword] = useState('');
   const [validationError, setValidationError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const update = (key: keyof IRegisterPayload, val: string) =>
     setForm((f) => ({ ...f, [key]: val }));
@@ -76,25 +78,35 @@ export const RegisterForm: React.FC<Props> = ({ onSubmit, isLoading, error }) =>
       </View>
       <View style={styles.field}>
         <Text style={styles.label}>Password</Text>
-        <TextInput
-          value={form.password}
-          onChangeText={(v) => update('password', v)}
-          placeholder="••••••••"
-          placeholderTextColor={COLORS.textMuted}
-          secureTextEntry
-          style={styles.input}
-        />
+        <View style={styles.passwordWrapper}>
+          <TextInput
+            value={form.password}
+            onChangeText={(v) => update('password', v)}
+            placeholder="••••••••"
+            placeholderTextColor={COLORS.textMuted}
+            secureTextEntry={!showPassword}
+            style={styles.passwordInput}
+          />
+          <TouchableOpacity onPress={() => setShowPassword((v) => !v)} style={styles.eyeBtn}>
+            <Text style={styles.eyeIcon}>{showPassword ? '🙈' : '👁️'}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.field}>
         <Text style={styles.label}>Confirm Password</Text>
-        <TextInput
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          placeholder="••••••••"
-          placeholderTextColor={COLORS.textMuted}
-          secureTextEntry
-          style={styles.input}
-        />
+        <View style={styles.passwordWrapper}>
+          <TextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            placeholder="••••••••"
+            placeholderTextColor={COLORS.textMuted}
+            secureTextEntry={!showConfirm}
+            style={styles.passwordInput}
+          />
+          <TouchableOpacity onPress={() => setShowConfirm((v) => !v)} style={styles.eyeBtn}>
+            <Text style={styles.eyeIcon}>{showConfirm ? '🙈' : '👁️'}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <TouchableOpacity
         onPress={handleSubmit}
@@ -128,6 +140,26 @@ const styles = StyleSheet.create({
     color: COLORS.text,
     fontSize: 15,
   },
+  passwordWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.surface,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: 10,
+  },
+  passwordInput: {
+    flex: 1,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    color: COLORS.text,
+    fontSize: 15,
+  },
+  eyeBtn: {
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+  },
+  eyeIcon: { fontSize: 16 },
   btn: {
     backgroundColor: COLORS.primary,
     borderRadius: 10,

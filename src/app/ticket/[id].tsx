@@ -5,6 +5,7 @@ import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
 import { ITicket } from '@/types/ticket.types';
 import { useTicketStore } from '@/store/ticketStore';
 import { useFixtureStore } from '@/store/fixtureStore';
+import { ticketService } from '@/services/ticket.service';
 import { TicketLeg } from '@/components/ticket/TicketLeg';
 import { TicketStatusBadge } from '@/components/ticket/TicketStatusBadge';
 import { ConfirmModal } from '@/components/shared/ConfirmModal';
@@ -22,8 +23,13 @@ export default function TicketDetailScreen() {
   const [loading, setLoading] = useState(true);
   const [showDelete, setShowDelete] = useState(false);
 
-  const load = async () => {
+  const load = async (triggerResolve = false) => {
     setLoading(true);
+    // If the ticket is pending, ask the server to run outcome resolution first
+    // so the status we get back is always as fresh as possible.
+    if (triggerResolve) {
+      try { await ticketService.resolveTicket(id); } catch {}
+    }
     const t = await fetchTicket(id);
     setTicket(t);
     if (t?.legs?.length) {
@@ -46,8 +52,10 @@ export default function TicketDetailScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      load();
-      const interval = setInterval(load, 30000);
+      // Trigger server-side resolve on first open so PENDING tickets update immediately
+      load(true);
+      // Then poll every 60s — server cron runs every 15 min, on-demand resolve covers the rest
+      const interval = setInterval(() => load(false), 60000);
       return () => clearInterval(interval);
     }, [id])
   );
