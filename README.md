@@ -90,3 +90,10 @@ echo ".env" >> .gitignore
 git add .gitignore
 git commit -m "chore: remove .env from tracking"
 git push
+
+# EAS .ENV
+
+1. Find the variable (to confirm which environment it's in — development/preview/production):
+   basheas env:list
+2. Update it:
+   basheas env:update EXPO_PUBLIC_API_URL --value "https://" --environment production

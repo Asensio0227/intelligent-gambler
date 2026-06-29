@@ -8,7 +8,7 @@ export default () => ({
   userInterfaceStyle: 'dark',
   ios: {
     supportsTablet: true,
-    bundleIdentifier: 'com.skycodingjr.intelligentgambler',
+    bundleIdentifier: 'com.skycoding.intelligentgambler',
   },
   android: {
     package: 'com.skycoding.intelligentgambler',
