@@ -74,3 +74,19 @@ git commit -m "remove google-services.json from repo"
 # push to github
 
 git push origin main
+
+# Delete a file on my repo
+
+# 1. Remove .env from git tracking (keeps the file locally)
+
+git rm --cached .env
+
+# 2. Make sure .env is in .gitignore
+
+echo ".env" >> .gitignore
+
+# 3. Commit
+
+git add .gitignore
+git commit -m "chore: remove .env from tracking"
+git push
