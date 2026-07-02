@@ -6,6 +6,12 @@ export default () => ({
   icon: './assets/images/icon.png',
   scheme: 'intelligent-gambler',
   userInterfaceStyle: 'dark',
+  updates: {
+    url: 'https://u.expo.dev/48f37f7f-4030-4f57-bb45-12a93a341a31',
+  },
+  runtimeVersion: {
+    policy: 'appVersion',
+  },
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'com.skycoding.intelligentgambler',
