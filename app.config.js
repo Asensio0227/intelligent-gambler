@@ -35,6 +35,14 @@ export default () => ({
   plugins: [
     'expo-router',
     [
+      'expo-build-properties',
+      {
+        android: {
+          usesCleartextTraffic: true,
+        },
+      },
+    ],
+    [
       'expo-splash-screen',
       {
         backgroundColor: '#0f172a',
