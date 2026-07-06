@@ -93,6 +93,10 @@ export default function RootLayout() {
         <Stack.Screen name='ticket/auto' />
         <Stack.Screen name='ticket/ask' />
         <Stack.Screen name='notifications/index' />
+        <Stack.Screen name='legal/index' />
+        <Stack.Screen name='legal/privacy' />
+        <Stack.Screen name='legal/terms' />
+        <Stack.Screen name='legal/delete-account' />
         <Stack.Screen name='+not-found' />
       </Stack>
     </SafeAreaProvider>

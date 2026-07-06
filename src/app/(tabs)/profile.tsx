@@ -95,6 +95,17 @@ export default function ProfileScreen() {
           </View>
         </View>
 
+        {/* About & Legal */}
+        <TouchableOpacity
+          onPress={() => router.push('/legal' as never)}
+          style={styles.card}
+        >
+          <View style={styles.row}>
+            <Text style={styles.rowLabel}>About & Legal</Text>
+            <Text style={[styles.rowValue, { color: COLORS.primary }]}>›</Text>
+          </View>
+        </TouchableOpacity>
+
         {/* Logout */}
         <TouchableOpacity
           onPress={() => setShowLogout(true)}
