@@ -39,7 +39,7 @@ export default function NotificationsScreen() {
               <Text style={styles.itemTitle}>{item.title}</Text>
               <Text style={styles.itemBody}>{item.body}</Text>
               <Text style={styles.itemDate}>
-                {new Date(item.createdAt).toLocaleDateString('en-ZA', { timeZone: 'Africa/Johannesburg' })}
+                {new Date(item.createdAt).toLocaleDateString('en-ZW', { timeZone: 'Africa/Harare' })}
               </Text>
             </View>
             <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.deleteBtn}>

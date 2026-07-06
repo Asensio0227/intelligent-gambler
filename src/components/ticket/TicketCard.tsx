@@ -12,8 +12,8 @@ interface Props {
 }
 
 const formatDate = (d: string) =>
-  new Date(d).toLocaleDateString('en-ZA', {
-    timeZone: 'Africa/Johannesburg',
+  new Date(d).toLocaleDateString('en-ZW', {
+    timeZone: 'Africa/Harare',
     day: 'numeric',
     month: 'short',
     year: 'numeric',

@@ -29,7 +29,7 @@ export default function AdminFixturesScreen() {
   const handleSync = async () => {
     setSyncing(true);
     await syncFixtures();
-    setLastSync(new Date().toLocaleTimeString('en-ZA', { timeZone: 'Africa/Johannesburg' }));
+    setLastSync(new Date().toLocaleTimeString('en-ZW', { timeZone: 'Africa/Harare' }));
     await fetchFixtures();
     setSyncing(false);
   };

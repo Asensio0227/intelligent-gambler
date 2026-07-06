@@ -70,7 +70,7 @@ export default function TicketDetailScreen() {
   if (!ticket) return null;
 
   const fmt = (d: string) =>
-    new Date(d).toLocaleDateString('en-ZA', { timeZone: 'Africa/Johannesburg', year: 'numeric', month: 'long', day: 'numeric' });
+    new Date(d).toLocaleDateString('en-ZW', { timeZone: 'Africa/Harare', year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
     <SafeAreaView style={styles.safeArea}>

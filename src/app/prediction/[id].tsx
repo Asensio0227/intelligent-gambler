@@ -94,7 +94,7 @@ export default function PredictionDetailScreen() {
             <Text style={styles.cardTitle}>Outcome</Text>
             <Text style={styles.resolvedDate}>
               Resolved: {prediction.outcome.resolvedAt
-                ? new Date(prediction.outcome.resolvedAt).toLocaleDateString('en-ZA')
+                ? new Date(prediction.outcome.resolvedAt).toLocaleDateString('en-ZW')
                 : '—'}
             </Text>
           </View>

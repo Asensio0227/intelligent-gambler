@@ -21,8 +21,8 @@ const STATUS_COLORS: Record<string, string> = {
 
 const formatKickoff = (dateStr: string) => {
   const date = new Date(dateStr);
-  return date.toLocaleString('en-ZA', {
-    timeZone: 'Africa/Johannesburg',
+  return date.toLocaleString('en-ZW', {
+    timeZone: 'Africa/Harare',
     weekday: 'short',
     month: 'short',
     day: 'numeric',

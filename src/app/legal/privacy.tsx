@@ -20,8 +20,8 @@ export default function PrivacyPolicyScreen() {
         <Text style={styles.intro}>
           This Privacy Policy explains how Sky Coding ("we," "us," "our")
           collects, uses, and protects information when you use Intelligent
-          Gambler ("the App"), in accordance with South Africa's Protection of
-          Personal Information Act (POPIA).
+          Gambler ("the App"), in accordance with Zimbabwe's Cyber and Data
+          Protection Act [Chapter 11:12].
         </Text>
 
         <Section title="1. Information We Collect">
@@ -48,7 +48,7 @@ export default function PrivacyPolicyScreen() {
           We process your information on the basis of: your consent (where
           given); performance of our contract with you (these Terms); and our
           legitimate business interests in operating and securing the App, to
-          the extent consistent with POPIA.
+          the extent consistent with Zimbabwe's Cyber and Data Protection Act.
         </Section>
 
         <Section title="4. Data Sharing">
@@ -68,15 +68,16 @@ export default function PrivacyPolicyScreen() {
           subject to any records we are legally required to retain.
         </Section>
 
-        <Section title="6. Your Rights (POPIA)">
-          Subject to POPIA, you have the right to: access the personal
-          information we hold about you; request correction or deletion of
-          your information; object to processing in certain circumstances;
-          and lodge a complaint with the Information Regulator of South
-          Africa. To exercise these rights, contact us at
-          skycodingjr@gmail.com. We may require proof of identity before
-          acting on a request and may decline requests where we have a
-          legitimate legal basis to retain information.
+        <Section title="6. Your Rights">
+          Subject to Zimbabwe's Cyber and Data Protection Act, you have the
+          right to: access the personal information we hold about you;
+          request correction or deletion of your information; object to
+          processing in certain circumstances; and lodge a complaint with
+          the Postal and Telecommunications Regulatory Authority of Zimbabwe
+          (POTRAZ), Zimbabwe's data protection authority. To exercise these
+          rights, contact us at skycodingjr@gmail.com. We may require proof
+          of identity before acting on a request and may decline requests
+          where we have a legitimate legal basis to retain information.
         </Section>
 
         <Section title="7. Security">

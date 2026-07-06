@@ -24,8 +24,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const fmt = (d: string) =>
-  new Date(d).toLocaleString('en-ZA', {
-    timeZone: 'Africa/Johannesburg',
+  new Date(d).toLocaleString('en-ZW', {
+    timeZone: 'Africa/Harare',
     weekday: 'long',
     year: 'numeric',
     month: 'long',

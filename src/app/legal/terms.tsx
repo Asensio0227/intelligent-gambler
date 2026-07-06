@@ -60,7 +60,7 @@ export default function TermsScreen() {
           special, consequential, or punitive damages arising from your use
           of the App. Our total aggregate liability shall not exceed the
           greater of the amount you paid us in the three months preceding a
-          claim, or ZAR 100.
+          claim, or US$100.
         </Section>
 
         <Section title="6. Subscriptions, Credits, and Payments">
@@ -104,12 +104,12 @@ export default function TermsScreen() {
         </Section>
 
         <Section title="12. Governing Law and Dispute Resolution">
-          These Terms are governed by the laws of the Republic of South
-          Africa. Disputes will first be attempted to be resolved informally
-          by contacting us. Unresolved disputes will be submitted to
-          arbitration under the rules of the Arbitration Foundation of
-          Southern Africa (AFSA). You waive any right to participate in a
-          class action against us.
+          These Terms are governed by the laws of the Republic of Zimbabwe.
+          Disputes will first be attempted to be resolved informally by
+          contacting us. Unresolved disputes will be submitted to
+          arbitration in Harare, Zimbabwe, under the Arbitration Act
+          [Chapter 7:15]. You waive any right to participate in a class
+          action against us.
         </Section>
 
         <Section title="13. Severability and Entire Agreement">

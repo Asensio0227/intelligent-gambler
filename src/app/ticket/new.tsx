@@ -26,8 +26,8 @@ interface SelectedLeg {
 const DRAFT_KEY = 'ticket_draft_v1';
 
 const formatKickoff = (d: string) =>
-  new Date(d).toLocaleString('en-ZA', {
-    timeZone: 'Africa/Johannesburg',
+  new Date(d).toLocaleString('en-ZW', {
+    timeZone: 'Africa/Harare',
     weekday: 'short',
     month: 'short',
     day: 'numeric',
@@ -123,7 +123,7 @@ export default function NewTicketScreen() {
 
   const handleCreate = async () => {
     setError('');
-    const finalLabel = label.trim() || `Ticket – ${new Date().toLocaleDateString('en-ZA', { day: 'numeric', month: 'short' })}`;
+    const finalLabel = label.trim() || `Ticket – ${new Date().toLocaleDateString('en-ZW', { day: 'numeric', month: 'short' })}`;
     if (selectedLegs.length < 1) { setError(`Select at least 1 leg.`); return; }
     if (selectedLegs.length > 8) { setError(`Maximum 8 legs allowed (${selectedLegs.length} selected).`); return; }
 
