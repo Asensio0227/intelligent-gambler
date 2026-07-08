@@ -104,3 +104,5 @@ git push
    eas env:update EXPO_PUBLIC_API_URL --value "https://igintelligentgambler-105xf3nj.b4a.run/api" --environment production
 
 ./update-api-url.sh "https://your-new-url.b4a.run/api"
+
+eas build:list --platform android --limit 1
