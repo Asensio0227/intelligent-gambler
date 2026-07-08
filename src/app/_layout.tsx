@@ -6,8 +6,19 @@ import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
+import { LogBox } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '../../global.css';
+
+// expo-notifications internally tries to sync the device push token directly
+// with Expo's own servers (separate from our own /users/push-token call).
+// When that internal fetch gets cancelled (app backgrounding, dev reload, brief
+// network drop) it logs this warning. It's caught internally and non-blocking —
+// it does not affect our own push token registration with our backend — so we
+// silence it here rather than let it clutter logs.
+LogBox.ignoreLogs([
+  'Error thrown while updating the device push token with the server',
+]);
 
 function AuthGuard() {
   const { isAuthenticated, isLoading, restoreSession } = useAuthStore();

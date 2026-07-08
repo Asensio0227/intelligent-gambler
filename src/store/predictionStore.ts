@@ -15,7 +15,7 @@ interface PredictionStore {
   fetchPredictionForFixture: (fixtureId: string) => Promise<IPrediction | null>;
   fetchPrediction: (id: string) => Promise<IPrediction | null>;
   generatePrediction: (fixtureId: string) => Promise<IPrediction | null>;
-  fetchAll: () => Promise<void>;
+  fetchAll: (params?: { date?: string; team?: string; sort?: 'asc' | 'desc' }) => Promise<void>;
 }
 
 export const usePredictionStore = create<PredictionStore>((set, get) => ({
@@ -50,10 +50,11 @@ export const usePredictionStore = create<PredictionStore>((set, get) => ({
     } catch { set({ generating: false }); return null; }
   },
 
-  fetchAll: async () => {
+  fetchAll: async (params) => {
     set({ isLoading: true });
+    const isFiltered = !!(params?.date || params?.team || (params?.sort && params.sort !== 'desc'));
     try {
-      const res = await predictionService.getAll();
+      const res = await predictionService.getAll(params);
       const predictions: IPrediction[] = (res.data as any) ?? [];
       set({ allPredictions: predictions, isLoading: false });
 
@@ -103,8 +104,16 @@ export const usePredictionStore = create<PredictionStore>((set, get) => ({
 
       const mergedTeams = { ...already, ...newTeams };
       set((state) => ({ fixtureTeams: { ...state.fixtureTeams, ...newTeams } }));
-      await cacheSet(CACHE.PREDICTIONS, { predictions, teams: mergedTeams }, CACHE_TTL.PREDICTIONS);
+      if (!isFiltered) {
+        await cacheSet(CACHE.PREDICTIONS, { predictions, teams: mergedTeams }, CACHE_TTL.PREDICTIONS);
+      }
     } catch {
+      if (isFiltered) {
+        // Don't fall back to the full offline cache for a filtered/search
+        // request — that would silently show unfiltered results instead.
+        set({ isLoading: false });
+        return;
+      }
       const cached = await cacheGet<{ predictions: any[]; teams: any }>(CACHE.PREDICTIONS);
       if (cached) {
         set({

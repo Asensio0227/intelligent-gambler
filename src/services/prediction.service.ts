@@ -11,8 +11,8 @@ export const predictionService = {
   generate: (fixtureId: string) =>
     api.post<IPrediction>('/predictions/generate', { fixtureId }),
 
-  getAll: () =>
-    api.get<IPrediction[]>('/predictions'),
+  getAll: (params?: { date?: string; team?: string; sort?: 'asc' | 'desc' }) =>
+    api.get<IPrediction[]>('/predictions', { params }),
 
   getAccuracy: () =>
     api.get<{ total: number; correctResult: number }>('/predictions/accuracy'),

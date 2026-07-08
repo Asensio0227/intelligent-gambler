@@ -4,6 +4,8 @@ import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 import { authService } from '@/services/auth.service';
 
+let registrationInFlight = false;
+
 export const registerForPushNotificationsAsync = async (): Promise<string | null> => {
   if (!Device.isDevice) {
     // Push notifications don't work on simulators/emulators
@@ -35,6 +37,8 @@ export const registerForPushNotificationsAsync = async (): Promise<string | null
 };
 
 export const registerAndSendPushToken = async (): Promise<void> => {
+  if (registrationInFlight) return;
+  registrationInFlight = true;
   try {
     const token = await registerForPushNotificationsAsync();
     if (token) {
@@ -43,5 +47,7 @@ export const registerAndSendPushToken = async (): Promise<void> => {
   } catch (err) {
     // Fail silently — push notifications are non-critical
     console.warn('Push token registration failed:', err);
+  } finally {
+    registrationInFlight = false;
   }
 };
